@@ -2,11 +2,12 @@
   "name": "boost-product-launch",
   "version": "1.0.0",
   "description": "Boost Product Launch Website",
+  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "start": "node server.js"
+    "start": "vite preview"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.4",
