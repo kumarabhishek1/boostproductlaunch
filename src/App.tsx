@@ -303,23 +303,25 @@ function App() {
               </div>
               
               {/* Contact Information */}
-              <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-8">
+              <div className="flex flex-row items-center gap-2 sm:gap-4 text-xs">
                 <a href="mailto:hello@boostproductlaunch.com" 
-                   className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors">
-                  <Mail className="h-5 w-5" />
-                  <span>hello@boostproductlaunch.com</span>
+                   className="flex items-center gap-1 text-gray-400 hover:text-white transition-colors whitespace-nowrap">
+                  <Mail className="h-4 w-4" />
+                  hello@boostproductlaunch.com
                 </a>
+                <span className="text-gray-600">|</span>
                 <a href="tel:+14162775284" 
-                   className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors">
-                  <Phone className="h-5 w-5" />
-                  <span>+1 416 277 5284</span>
+                   className="flex items-center gap-1 text-gray-400 hover:text-white transition-colors whitespace-nowrap">
+                  <Phone className="h-4 w-4" />
+                  +1 416 277 5284
                 </a>
+                <span className="text-gray-600">|</span>
                 <a href="https://wa.me/17867853256" 
                    target="_blank"
                    rel="noopener noreferrer"
-                   className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors">
-                  <MessageCircle className="h-5 w-5" />
-                  <span>+1 786 785 3256</span>
+                   className="flex items-center gap-1 text-gray-400 hover:text-white transition-colors whitespace-nowrap">
+                  <MessageCircle className="h-4 w-4" />
+                  +1 786 785 3256
                 </a>
               </div>
 
