@@ -30,9 +30,9 @@ const ContactForm = () => {
 
   const onSubmit = async (data: FormData) => {
     try {
-      // Use the Vercel API route in production, local proxy in development
+      // Use the local proxy server in development, direct URL in production
       const API_URL = import.meta.env.PROD 
-        ? '/api/submit-form'
+        ? import.meta.env.VITE_GOOGLE_SCRIPT_URL
         : 'http://localhost:3001/submit-form';
       
       console.log('Submitting form data:', data);
@@ -60,7 +60,7 @@ const ContactForm = () => {
       console.error('Error submitting form:', error);
       console.error('Error details:', error?.message);
       console.error('Error stack:', error?.stack);
-      alert('There was an error submitting the form. Please try again or contact us directly at support@boostproductlaunch.com');
+      alert('There was an error submitting the form. Please try again or contact us directly at hello@boostproductlaunch.com');
     }
   };
 

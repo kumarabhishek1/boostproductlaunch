@@ -21,7 +21,13 @@ module.exports = async (req, res) => {
   }
 
   try {
-    const response = await fetch('https://script.google.com/macros/s/AKfycbzeChQOEkT7gLHA_5v9Y4SNR7YBD41Se3QLt90rwI165vXjVOFIO92FZX2OEVoeR6Ws/exec', {
+    const GOOGLE_SCRIPT_URL = process.env.VITE_GOOGLE_SCRIPT_URL;
+    
+    if (!GOOGLE_SCRIPT_URL) {
+      throw new Error('Google Apps Script URL is not configured');
+    }
+
+    const response = await fetch(GOOGLE_SCRIPT_URL, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

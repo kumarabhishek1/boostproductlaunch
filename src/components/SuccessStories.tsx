@@ -13,23 +13,9 @@ const SuccessStories: React.FC<Props> = ({ stories = [] }) => {
   const row1Ref = useRef<HTMLDivElement>(null);
   const row2Ref = useRef<HTMLDivElement>(null);
 
-  // Use Unsplash images for logos
-  const getLogoUrl = (index: number) => {
-    const urls = [
-      'https://images.unsplash.com/photo-1563986768609-322da13575f3?w=150',
-      'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=150',
-      'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=150',
-      'https://images.unsplash.com/photo-1551434678-e076c223a692?w=150',
-      'https://images.unsplash.com/photo-1559526324-4b87b5e36e44?w=150',
-      'https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=150',
-      'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=150',
-      'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=150',
-      'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=150',
-      'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=150',
-      'https://images.unsplash.com/photo-1555066932-d69dac093642?w=150',
-      'https://images.unsplash.com/photo-1552664730-d307ca884978?w=150'
-    ];
-    return urls[index % urls.length];
+  // Use a consistent placeholder image for all products
+  const getLogoUrl = () => {
+    return 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=150';
   };
 
   const scroll = (direction: 'left' | 'right') => {
@@ -154,7 +140,7 @@ const SuccessStories: React.FC<Props> = ({ stories = [] }) => {
                   
                   <div className="h-full flex flex-col items-center justify-center text-center p-3">
                     <img
-                      src={getLogoUrl(index)}
+                      src={getLogoUrl()}
                       alt={story.name}
                       className="w-16 h-16 object-cover rounded-lg mb-2 group-hover:scale-105 transition-transform duration-300"
                     />
@@ -206,7 +192,7 @@ const SuccessStories: React.FC<Props> = ({ stories = [] }) => {
                 
                 <div className="h-full flex flex-col items-center justify-center text-center p-3">
                   <img
-                    src={getLogoUrl(index + 6)}
+                    src={getLogoUrl()}
                     alt={story.name}
                     className="w-16 h-16 object-cover rounded-lg mb-2 group-hover:scale-105 transition-transform duration-300"
                   />
