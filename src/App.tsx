@@ -8,6 +8,7 @@ import ServicesSection from './components/ServicesSection';
 import LeadMagnetBanner from './components/LeadMagnetBanner';
 import UpvoteAnimation from './components/UpvoteAnimation';
 import AuthenticDistributionSection from './components/AuthenticDistributionSection';
+import WhatsAppButton from './components/WhatsAppButton';
 import { fetchSuccessStories } from './utils/googleSheets';
 import type { SuccessStory } from './types/successStory';
 
@@ -49,11 +50,9 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-white overflow-x-hidden w-full pt-[40px] sm:pt-[48px]">
-      <LeadMagnetBanner />
-      
-      {/* Header */}
-      <header className="bg-white border-b border-gray-200 sticky top-0 z-50 w-full">
+    <div className="min-h-screen bg-white overflow-x-hidden w-full">
+      {/* Header - Fixed at top */}
+      <header className="bg-white border-b border-gray-200 w-full shadow-sm fixed top-0 left-0 right-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
           <div className="flex justify-between items-center py-4">
             <div className="flex items-center gap-2">
@@ -133,154 +132,164 @@ function App() {
         </div>
       </header>
 
-      {/* Hero Section */}
-      <section className="py-12 sm:py-16 bg-gradient-to-b from-gray-50 to-white relative overflow-hidden w-full">
-        {/* Grid Background */}
-        <div className="absolute inset-0 overflow-hidden">
-          <div 
-            className="absolute inset-0"
-            style={{
-              backgroundImage: `
-                linear-gradient(to right, rgba(255, 97, 84, 0.05) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(255, 97, 84, 0.05) 1px, transparent 1px)
-              `,
-              backgroundSize: '40px 40px',
-              maskImage: 'radial-gradient(circle at center, black 30%, transparent 80%)',
-              WebkitMaskImage: 'radial-gradient(circle at center, black 30%, transparent 80%)'
-            }}
-          />
-          
-          <div 
-            className="absolute inset-0"
-            style={{
-              background: 'radial-gradient(circle at center, rgba(255, 97, 84, 0.08) 0%, transparent 50%)',
-              opacity: 0.8
-            }}
-          />
-          
-          <div 
-            className="absolute inset-0"
-            style={{
-              backgroundImage: `
-                linear-gradient(to right, rgba(255, 97, 84, 0.02) 2px, transparent 2px),
-                linear-gradient(to bottom, rgba(255, 97, 84, 0.02) 2px, transparent 2px)
-              `,
-              backgroundSize: '120px 120px',
-              maskImage: 'radial-gradient(circle at center, black 40%, transparent 70%)',
-              WebkitMaskImage: 'radial-gradient(circle at center, black 40%, transparent 70%)'
-            }}
-          />
-        </div>
+      {/* Lead Magnet Banner - Fixed below header */}
+      <div className="fixed top-[68px] sm:top-[84px] left-0 right-0 z-40 bg-gradient-to-b from-gray-50 to-white">
+        <LeadMagnetBanner />
+      </div>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-          <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-4xl sm:text-5xl lg:text-[56px] font-bold text-gray-900 leading-tight mb-6">
-              Boost Your Product Hunt Launch
-            </h1>
-            <p className="text-lg sm:text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
-              Amplify your product's visibility with our targeted distribution channels. Get more upvotes, more eyes, and more success on Product Hunt.
+      {/* Main content with padding-top to account for fixed header AND banner */}
+      <main className="pt-[128px] sm:pt-[148px]">
+        {/* Hero Section with padding-top */}
+        <section className="relative overflow-hidden w-full pb-12 sm:pb-16">
+          {/* Grid Background */}
+          <div className="fixed top-[68px] sm:top-[84px] left-0 right-0 h-screen overflow-hidden">
+            <div 
+              className="absolute inset-0"
+              style={{
+                backgroundImage: `
+                  linear-gradient(to right, rgba(255, 97, 84, 0.05) 1px, transparent 1px),
+                  linear-gradient(to bottom, rgba(255, 97, 84, 0.05) 1px, transparent 1px)
+                `,
+                backgroundSize: '40px 40px',
+                maskImage: 'radial-gradient(circle at center, black 30%, transparent 80%)',
+                WebkitMaskImage: 'radial-gradient(circle at center, black 30%, transparent 80%)'
+              }}
+            />
+            
+            <div 
+              className="absolute inset-0"
+              style={{
+                background: 'radial-gradient(circle at center, rgba(255, 97, 84, 0.08) 0%, transparent 50%)',
+                opacity: 0.8
+              }}
+            />
+            
+            <div 
+              className="absolute inset-0"
+              style={{
+                backgroundImage: `
+                  linear-gradient(to right, rgba(255, 97, 84, 0.02) 2px, transparent 2px),
+                  linear-gradient(to bottom, rgba(255, 97, 84, 0.02) 2px, transparent 2px)
+                `,
+                backgroundSize: '120px 120px',
+                maskImage: 'radial-gradient(circle at center, black 40%, transparent 70%)',
+                WebkitMaskImage: 'radial-gradient(circle at center, black 40%, transparent 70%)'
+              }}
+            />
+          </div>
+
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+            <div className="max-w-4xl mx-auto text-center pt-8 sm:pt-0">
+              <h1 className="text-4xl sm:text-5xl lg:text-[56px] font-bold text-gray-900 leading-tight mb-6">
+                Boost Your Product Hunt Launch
+              </h1>
+              <p className="text-lg sm:text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+                Amplify your product's visibility with our targeted distribution channels. Get more upvotes, more eyes, and more success on Product Hunt.
+              </p>
+              <div className="flex flex-col sm:flex-row justify-center gap-4 mb-12">
+                <button 
+                  onClick={() => scrollToSection('pricing')}
+                  className="bg-[#ff6154] text-white px-6 py-3 rounded-md font-medium hover:bg-[#e5574b] transition-colors w-full sm:w-auto"
+                >
+                  Boost my Product Launch
+                </button>
+                <button 
+                  onClick={() => scrollToSection('success-stories')}
+                  className="border border-[#ff6154] text-[#ff6154] px-6 py-3 rounded-md font-medium hover:bg-[#fff8f7] transition-colors w-full sm:w-auto"
+                >
+                  View Success Stories
+                </button>
+              </div>
+            </div>
+
+            {/* Upvote Animation */}
+            <div className="mt-8">
+              <UpvoteAnimation />
+            </div>
+          </div>
+        </section>
+
+        {/* Success Stories */}
+        <section id="success-stories" className="py-16 sm:py-20 bg-gray-50 w-full">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 className="text-3xl sm:text-4xl font-bold text-center mb-4">Trusted by Successful Product Launchers</h2>
+            <p className="text-gray-600 text-center text-base sm:text-lg mb-12 sm:mb-16 max-w-3xl mx-auto">
+              See how other products achieved remarkable success with our distribution network. Real experiences from founders who boosted their Product Hunt success.
             </p>
-            <div className="flex flex-col sm:flex-row justify-center gap-4 mb-12">
+            {loading ? (
+              <div className="text-center py-12">
+                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#ff6154] mx-auto"></div>
+                <p className="text-gray-600 mt-4">Loading success stories...</p>
+              </div>
+            ) : error ? (
+              <div className="text-center py-12">
+                <p className="text-red-500">{error}</p>
+              </div>
+            ) : (
+              <SuccessStories stories={successStories} />
+            )}
+            <div className="mt-12 text-center">
               <button 
                 onClick={() => scrollToSection('pricing')}
-                className="bg-[#ff6154] text-white px-6 py-3 rounded-md font-medium hover:bg-[#e5574b] transition-colors w-full sm:w-auto"
+                className="inline-flex items-center bg-[#ff6154] text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold hover:bg-[#e5574b] transition-colors text-base sm:text-lg gap-2 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200"
               >
                 Boost my Product Launch
-              </button>
-              <button 
-                onClick={() => scrollToSection('success-stories')}
-                className="border border-[#ff6154] text-[#ff6154] px-6 py-3 rounded-md font-medium hover:bg-[#fff8f7] transition-colors w-full sm:w-auto"
-              >
-                View Success Stories
+                <ChevronRight className="h-5 w-5" strokeWidth={2.5} />
               </button>
             </div>
           </div>
+        </section>
 
-          {/* Upvote Animation */}
-          <div className="mt-8">
-            <UpvoteAnimation />
+        {/* Services Section */}
+        <ServicesSection />
+
+        {/* Authentic Distribution Section */}
+        <AuthenticDistributionSection />
+
+        {/* Pricing Section */}
+        <section id="pricing" className="py-16 sm:py-20 w-full">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 className="text-3xl sm:text-4xl font-bold text-center mb-12 sm:mb-16">Choose Your Launch Scale</h2>
+            <PricingPlans />
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Success Stories */}
-      <section id="success-stories" className="py-16 sm:py-20 bg-gray-50 w-full">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl sm:text-4xl font-bold text-center mb-4">Trusted by Successful Product Launchers</h2>
-          <p className="text-gray-600 text-center text-base sm:text-lg mb-12 sm:mb-16 max-w-3xl mx-auto">
-            See how other products achieved remarkable success with our distribution network. Real experiences from founders who boosted their Product Hunt success.
-          </p>
-          {loading ? (
-            <div className="text-center py-12">
-              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#ff6154] mx-auto"></div>
-              <p className="text-gray-600 mt-4">Loading success stories...</p>
-            </div>
-          ) : error ? (
-            <div className="text-center py-12">
-              <p className="text-red-500">{error}</p>
-            </div>
-          ) : (
-            <SuccessStories stories={successStories} />
-          )}
-          <div className="mt-12 text-center">
-            <button 
-              onClick={() => scrollToSection('pricing')}
-              className="inline-flex items-center bg-[#ff6154] text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold hover:bg-[#e5574b] transition-colors text-base sm:text-lg gap-2 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200"
-            >
-              Boost my Product Launch
-              <ChevronRight className="h-5 w-5" strokeWidth={2.5} />
-            </button>
+        {/* Contact Section */}
+        <section id="contact" className="py-16 sm:py-20 bg-gray-50 w-full">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 className="text-3xl sm:text-4xl font-bold text-center mb-4">Have questions? Reach out to us.</h2>
+            <p className="text-gray-600 text-center text-base sm:text-lg mb-12 sm:mb-16 max-w-2xl mx-auto">
+              Expect no sales, just a lot of support.
+            </p>
+            <ContactForm />
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Services Section */}
-      <ServicesSection />
+        {/* FAQ Section */}
+        <section id="faqs" className="py-16 sm:py-20 w-full">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 className="text-3xl sm:text-4xl font-bold text-center mb-12 sm:mb-16">Frequently Asked Questions</h2>
+            <FAQ />
+          </div>
+        </section>
 
-      {/* Authentic Distribution Section */}
-      <AuthenticDistributionSection />
+        <WhatsAppButton phoneNumber="17867853256" />
 
-      {/* Pricing Section */}
-      <section id="pricing" className="py-16 sm:py-20 w-full">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl sm:text-4xl font-bold text-center mb-12 sm:mb-16">Choose Your Launch Scale</h2>
-          <PricingPlans />
-        </div>
-      </section>
-
-      {/* Contact Section */}
-      <section id="contact" className="py-16 sm:py-20 bg-gray-50 w-full">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl sm:text-4xl font-bold text-center mb-4">Have questions? Reach out to us.</h2>
-          <p className="text-gray-600 text-center text-base sm:text-lg mb-12 sm:mb-16 max-w-2xl mx-auto">
-            Expect no sales, just a lot of support.
-          </p>
-          <ContactForm />
-        </div>
-      </section>
-
-      {/* FAQ Section */}
-      <section id="faqs" className="py-16 sm:py-20 w-full">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl sm:text-4xl font-bold text-center mb-12 sm:mb-16">Frequently Asked Questions</h2>
-          <FAQ />
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="bg-gray-900 text-white py-8 sm:py-12 w-full">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <div className="flex items-center space-x-2">
-              <Rocket className="h-6 w-6" />
-              <span className="text-xl font-bold">BoostProductLaunch</span>
-            </div>
-            <div className="text-gray-400 text-sm text-center md:text-left">
-              © {new Date().getFullYear()} BoostProductLaunch. All rights reserved.
+        {/* Footer */}
+        <footer className="bg-gray-900 text-white py-8 sm:py-12 w-full">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+              <div className="flex items-center space-x-2">
+                <Rocket className="h-6 w-6" />
+                <span className="text-xl font-bold">BoostProductLaunch</span>
+              </div>
+              <div className="text-gray-400 text-sm text-center md:text-left">
+                © {new Date().getFullYear()} BoostProductLaunch. All rights reserved.
+              </div>
             </div>
           </div>
-        </div>
-      </footer>
+        </footer>
+      </main>
     </div>
   );
 }

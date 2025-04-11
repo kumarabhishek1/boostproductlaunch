@@ -53,7 +53,7 @@ const UpvoteAnimation = () => {
       const height = canvas.offsetHeight;
       
       ctx.beginPath();
-      ctx.strokeStyle = 'rgba(156, 163, 175, 0.4)'; // Increased opacity
+      ctx.strokeStyle = 'rgba(156, 163, 175, 0.4)';
       ctx.lineWidth = 2;
       
       // Y-axis
@@ -66,26 +66,29 @@ const UpvoteAnimation = () => {
       
       ctx.stroke();
 
-      // Draw y-axis labels with increased visibility
-      ctx.fillStyle = 'rgba(107, 114, 128, 1)'; // Full opacity
-      ctx.font = '14px Inter, system-ui, sans-serif';
+      // Set font size based on canvas width
+      const fontSize = width < 400 ? 10 : 14;
+      ctx.font = `${fontSize}px Inter, system-ui, sans-serif`;
+
+      // Draw y-axis labels with increased visibility and spacing
+      ctx.fillStyle = 'rgba(107, 114, 128, 1)';
       ctx.textAlign = 'right';
       
       const maxUpvotes = 550;
-      const steps = 11;
+      const steps = width < 400 ? 5 : 11; // Fewer steps on mobile
       for (let i = 0; i <= steps; i++) {
         const y = height - 40 - ((height - 80) * (i / steps));
         const value = Math.round((maxUpvotes * i) / steps);
-        ctx.fillText(value.toString(), 50, y + 4);
+        ctx.fillText(value.toString(), 45, y + 4); // Moved labels slightly left
       }
 
-      // Add x-axis labels
+      // Add x-axis labels with adjusted spacing
       ctx.textAlign = 'center';
-      const hours = ['0h', '6h', '12h', '18h', '24h'];
+      const hours = width < 400 ? ['0h', '12h', '24h'] : ['0h', '6h', '12h', '18h', '24h']; // Fewer labels on mobile
       const xStep = (width - 100) / (hours.length - 1);
       hours.forEach((hour, i) => {
         const x = 60 + (xStep * i);
-        ctx.fillText(hour, x, height - 20);
+        ctx.fillText(hour, x, height - 15); // Moved labels up slightly
       });
     };
 
@@ -193,31 +196,31 @@ const UpvoteAnimation = () => {
   }, []);
 
   return (
-    <div className="relative bg-white rounded-xl shadow-lg p-6 max-w-2xl mx-auto">
-      <div className="absolute top-4 left-4 flex items-center gap-2">
-        <TrendingUp className="h-5 w-5 text-[#ff6154]" />
-        <span className="font-semibold text-gray-900">Upvote Growth</span>
+    <div className="relative bg-white rounded-xl shadow-lg p-4 sm:p-6 max-w-2xl mx-auto">
+      <div className="absolute top-2 sm:top-4 left-2 sm:left-4 flex items-center gap-1 sm:gap-2">
+        <TrendingUp className="h-4 w-4 sm:h-5 sm:w-5 text-[#ff6154]" />
+        <span className="font-semibold text-gray-900 text-sm sm:text-base">Upvote Growth</span>
       </div>
-      <div className="flex gap-4 absolute top-4 right-4">
-        <div className="flex items-center gap-2">
-          <div className="w-3 h-3 rounded-full bg-[#ff6154]" />
-          <span className="text-sm text-gray-600">With Our Service</span>
+      <div className="flex flex-wrap gap-2 sm:gap-4 absolute top-10 sm:top-4 right-2 sm:right-4">
+        <div className="flex items-center gap-1 sm:gap-2">
+          <div className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-[#ff6154]" />
+          <span className="text-xs sm:text-sm text-gray-600">With our service</span>
         </div>
-        <div className="flex items-center gap-2">
-          <div className="w-3 h-3 rounded-full bg-[#FF69B4]" />
-          <span className="text-sm text-gray-600">Competitor A</span>
+        <div className="flex items-center gap-1 sm:gap-2">
+          <div className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-[#FF69B4]" />
+          <span className="text-xs sm:text-sm text-gray-600">Comp. A</span>
         </div>
-        <div className="flex items-center gap-2">
-          <div className="w-3 h-3 rounded-full bg-[#FFA07A]" />
-          <span className="text-sm text-gray-600">Competitor B</span>
+        <div className="flex items-center gap-1 sm:gap-2">
+          <div className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-[#FFA07A]" />
+          <span className="text-xs sm:text-sm text-gray-600">Comp. B</span>
         </div>
       </div>
       <canvas 
         ref={canvasRef}
-        className="w-full h-[400px]"
+        className="w-full h-[400px] mt-8 sm:mt-0"
       />
-      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 text-center">
-        <span className="text-sm text-gray-600">Launch Time (24 hours)</span>
+      <div className="absolute bottom-2 sm:bottom-4 left-1/2 -translate-x-1/2 text-center">
+        <span className="text-xs sm:text-sm text-gray-600">Launch Time (24 hours)</span>
       </div>
     </div>
   );
