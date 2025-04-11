@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Rocket, Users, Trophy, MessageSquare, ChevronRight, Menu, X } from 'lucide-react';
+import { Rocket, Users, Trophy, MessageSquare, ChevronRight, Menu, X, Mail, Phone, MessageCircle } from 'lucide-react';
 import ContactForm from './components/ContactForm';
 import PricingPlans from './components/PricingPlans';
 import SuccessStories from './components/SuccessStories';
@@ -8,6 +8,7 @@ import ServicesSection from './components/ServicesSection';
 import LeadMagnetBanner from './components/LeadMagnetBanner';
 import UpvoteAnimation from './components/UpvoteAnimation';
 import AuthenticDistributionSection from './components/AuthenticDistributionSection';
+import TopHunterSection from './components/TopHunterSection';
 import WhatsAppButton from './components/WhatsAppButton';
 import { fetchSuccessStories } from './utils/googleSheets';
 import type { SuccessStory } from './types/successStory';
@@ -62,6 +63,13 @@ function App() {
             {/* Desktop Navigation */}
             <nav className="hidden md:flex items-center gap-8">
               <button 
+                onClick={() => scrollToSection('top-hunter')} 
+                className="text-[#ff6154] hover:text-[#e5574b] border-2 border-[#ff6154] px-4 py-1.5 rounded-md hover:bg-[#fff8f7] transition-colors font-medium inline-flex items-center gap-2"
+              >
+                <Trophy className="h-5 w-5" />
+                Get Hunted by a Top Hunter
+              </button>
+              <button 
                 onClick={() => scrollToSection('pricing')} 
                 className="text-gray-600 hover:text-gray-900"
               >
@@ -104,6 +112,13 @@ function App() {
           {mobileMenuOpen && (
             <nav className="md:hidden py-4 space-y-4">
               <button 
+                onClick={() => scrollToSection('top-hunter')} 
+                className="block w-full text-left px-4 py-3 text-[#ff6154] hover:bg-[#fff8f7] border-l-4 border-[#ff6154] font-medium inline-flex items-center gap-2"
+              >
+                <Trophy className="h-5 w-5 flex-shrink-0" />
+                Get Hunted by a Top Hunter
+              </button>
+              <button 
                 onClick={() => scrollToSection('pricing')} 
                 className="block w-full text-left px-4 py-2 text-gray-600 hover:bg-gray-50"
               >
@@ -142,7 +157,7 @@ function App() {
         {/* Hero Section with padding-top */}
         <section className="relative overflow-hidden w-full pb-12 sm:pb-16">
           {/* Grid Background */}
-          <div className="fixed top-[68px] sm:top-[84px] left-0 right-0 h-screen overflow-hidden">
+          <div className="absolute inset-0">
             <div 
               className="absolute inset-0"
               style={{
@@ -246,6 +261,9 @@ function App() {
         {/* Authentic Distribution Section */}
         <AuthenticDistributionSection />
 
+        {/* Top Hunter Section */}
+        <TopHunterSection />
+
         {/* Pricing Section */}
         <section id="pricing" className="py-16 sm:py-20 w-full">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -278,12 +296,34 @@ function App() {
         {/* Footer */}
         <footer className="bg-gray-900 text-white py-8 sm:py-12 w-full">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+            <div className="flex flex-col md:flex-row justify-between items-center gap-6">
               <div className="flex items-center space-x-2">
                 <Rocket className="h-6 w-6" />
                 <span className="text-xl font-bold">BoostProductLaunch</span>
               </div>
-              <div className="text-gray-400 text-sm text-center md:text-left">
+              
+              {/* Contact Information */}
+              <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-8">
+                <a href="mailto:hello@boostproductlaunch.com" 
+                   className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors">
+                  <Mail className="h-5 w-5" />
+                  <span>hello@boostproductlaunch.com</span>
+                </a>
+                <a href="tel:+14162775284" 
+                   className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors">
+                  <Phone className="h-5 w-5" />
+                  <span>+1 416 277 5284</span>
+                </a>
+                <a href="https://wa.me/17867853256" 
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors">
+                  <MessageCircle className="h-5 w-5" />
+                  <span>+1 786 785 3256</span>
+                </a>
+              </div>
+
+              <div className="text-gray-400 text-sm">
                 © {new Date().getFullYear()} BoostProductLaunch. All rights reserved.
               </div>
             </div>

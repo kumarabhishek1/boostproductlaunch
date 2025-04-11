@@ -1,5 +1,5 @@
-import React from 'react';
-import { MessageSquare, Send, Globe, Link2, Phone, Mail, Loader2 } from 'lucide-react';
+import React, { useState } from 'react';
+import { MessageSquare, Send, Globe, Link2, Phone, Mail, Loader2, MessageCircle } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -65,14 +65,52 @@ const ContactForm = () => {
   };
 
   return (
-    <div className="w-full max-w-2xl mx-auto bg-white rounded-xl shadow-lg overflow-hidden">
-      <div className="px-4 sm:px-8 py-6">
-        <div className="flex items-center gap-2 mb-6">
-          <MessageSquare className="h-5 w-5 sm:h-6 sm:w-6 text-[#ff6154]" />
-          <h2 className="text-xl sm:text-2xl font-bold text-gray-800">Get in Touch</h2>
+    <div className="max-w-4xl mx-auto">
+      {/* Contact Information */}
+      <div className="bg-white rounded-2xl p-6 sm:p-8 shadow-lg mb-8">
+        <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6 text-center">Contact Us</h3>
+        <div className="grid sm:grid-cols-3 gap-6 mb-8">
+          <a href="mailto:hello@boostproductlaunch.com" 
+             className="flex flex-col items-center gap-3 p-4 rounded-xl hover:bg-gray-50 transition-colors">
+            <div className="bg-[#fff4f2] p-3 rounded-xl">
+              <Mail className="h-6 w-6 text-[#ff6154]" />
+            </div>
+            <div className="text-center">
+              <div className="font-medium text-gray-900 mb-1">Email Us</div>
+              <div className="text-sm text-gray-600">hello@boostproductlaunch.com</div>
+            </div>
+          </a>
+
+          <a href="tel:+14162775284" 
+             className="flex flex-col items-center gap-3 p-4 rounded-xl hover:bg-gray-50 transition-colors">
+            <div className="bg-[#fff4f2] p-3 rounded-xl">
+              <Phone className="h-6 w-6 text-[#ff6154]" />
+            </div>
+            <div className="text-center">
+              <div className="font-medium text-gray-900 mb-1">Call Us</div>
+              <div className="text-sm text-gray-600">+1 416 277 5284</div>
+            </div>
+          </a>
+
+          <a href="https://wa.me/17867853256" 
+             target="_blank"
+             rel="noopener noreferrer"
+             className="flex flex-col items-center gap-3 p-4 rounded-xl hover:bg-gray-50 transition-colors">
+            <div className="bg-[#fff4f2] p-3 rounded-xl">
+              <MessageCircle className="h-6 w-6 text-[#ff6154]" />
+            </div>
+            <div className="text-center">
+              <div className="font-medium text-gray-900 mb-1">WhatsApp</div>
+              <div className="text-sm text-gray-600">+1 786 785 3256</div>
+            </div>
+          </a>
         </div>
-        
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 sm:space-y-6">
+      </div>
+
+      {/* Contact Form */}
+      <div className="bg-white rounded-2xl p-6 sm:p-8 shadow-lg">
+        <h3 className="text-xl font-bold text-gray-900 mb-6">Send us a message</h3>
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
           <div>
             <label htmlFor="fullName" className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-1">
               <span className="text-red-500">*</span> Full Name
