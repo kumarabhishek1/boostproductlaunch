@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Rocket, Users, Trophy, MessageSquare, ChevronRight, Menu, X, Mail, Phone, MessageCircle } from 'lucide-react';
+import './styles/scrollbar.css';
 import ContactForm from './components/ContactForm';
 import PricingPlans from './components/PricingPlans';
 import SuccessStories from './components/SuccessStories';
@@ -303,23 +304,23 @@ function App() {
               </div>
               
               {/* Contact Information */}
-              <div className="flex flex-row items-center gap-2 sm:gap-4 text-xs">
+              <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4 text-sm">
                 <a href="mailto:hello@boostproductlaunch.com" 
-                   className="flex items-center gap-1 text-gray-400 hover:text-white transition-colors whitespace-nowrap">
+                   className="flex items-center gap-1.5 text-gray-400 hover:text-white transition-colors whitespace-nowrap">
                   <Mail className="h-4 w-4" />
                   hello@boostproductlaunch.com
                 </a>
-                <span className="text-gray-600">|</span>
+                <span className="hidden sm:block text-gray-600">|</span>
                 <a href="tel:+14162775284" 
-                   className="flex items-center gap-1 text-gray-400 hover:text-white transition-colors whitespace-nowrap">
+                   className="flex items-center gap-1.5 text-gray-400 hover:text-white transition-colors whitespace-nowrap">
                   <Phone className="h-4 w-4" />
                   +1 416 277 5284
                 </a>
-                <span className="text-gray-600">|</span>
+                <span className="hidden sm:block text-gray-600">|</span>
                 <a href="https://wa.me/17867853256" 
                    target="_blank"
                    rel="noopener noreferrer"
-                   className="flex items-center gap-1 text-gray-400 hover:text-white transition-colors whitespace-nowrap">
+                   className="flex items-center gap-1.5 text-gray-400 hover:text-white transition-colors whitespace-nowrap">
                   <MessageCircle className="h-4 w-4" />
                   +1 786 785 3256
                 </a>
