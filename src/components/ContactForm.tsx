@@ -30,31 +30,32 @@ const ContactForm = () => {
 
   const onSubmit = async (data: FormData) => {
     try {
-      // Use the local proxy server in development, direct URL in production
-      const API_URL = import.meta.env.PROD 
-        ? import.meta.env.VITE_GOOGLE_SCRIPT_URL
-        : 'http://localhost:3001/submit-form';
+      // Get the Google Script URL from environment variables
+      const GOOGLE_SCRIPT_URL = import.meta.env.VITE_GOOGLE_SCRIPT_URL;
       
+      if (!GOOGLE_SCRIPT_URL) {
+        throw new Error('Google Apps Script URL is not configured');
+      }
+
       console.log('Submitting form data:', data);
       
-      const response = await fetch(API_URL, {
+      // Use fetch with no-cors mode for Google Apps Script
+      const response = await fetch(GOOGLE_SCRIPT_URL, {
         method: 'POST',
+        mode: 'no-cors',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify({
+          ...data,
+          timestamp: new Date().toISOString()
+        }),
       });
 
-      console.log('API response status:', response.status);
-      const result = await response.json();
-      console.log('API response data:', result);
-      
-      if (response.ok) {
-        reset();
-        alert('Thank you for your message! We will get back to you soon.');
-      } else {
-        throw new Error(result.error || result.message || 'Failed to submit form');
-      }
+      // Since no-cors mode doesn't return response details, we assume success if no error
+      console.log('Form submitted successfully');
+      reset();
+      alert('Thank you for your message! We will get back to you soon.');
       
     } catch (error: any) {
       console.error('Error submitting form:', error);
