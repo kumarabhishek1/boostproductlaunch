@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { X, Rocket } from 'lucide-react';
 
 const emailAddress = 'hello@boostproductlaunch.com';
 
@@ -8,6 +9,7 @@ interface WhatsAppButtonProps {
 
 const WhatsAppButton: React.FC<WhatsAppButtonProps> = ({ phoneNumber }: WhatsAppButtonProps) => {
   const [animate, setAnimate] = useState(false);
+  const [showBubble, setShowBubble] = useState(true);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -15,7 +17,15 @@ const WhatsAppButton: React.FC<WhatsAppButtonProps> = ({ phoneNumber }: WhatsApp
       setTimeout(() => setAnimate(false), 500);
     }, 5000);
 
-    return () => clearInterval(interval);
+    // Show bubble again after 30 seconds if it was closed
+    const bubbleInterval = setInterval(() => {
+      setShowBubble(true);
+    }, 30000);
+
+    return () => {
+      clearInterval(interval);
+      clearInterval(bubbleInterval);
+    };
   }, []);
 
   const handleWhatsAppClick = (): void => {
@@ -24,6 +34,20 @@ const WhatsAppButton: React.FC<WhatsAppButtonProps> = ({ phoneNumber }: WhatsApp
 
   return (
     <div className="fixed bottom-4 right-4 flex flex-col items-end gap-2 z-50">
+      {showBubble && (
+        <div className="bg-white rounded-lg shadow-lg p-3 pr-8 mb-2 relative animate-fade-in">
+          <button 
+            onClick={() => setShowBubble(false)}
+            className="absolute top-1 right-1 p-1 text-gray-400 hover:text-gray-600 transition-colors"
+          >
+            <X size={14} />
+          </button>
+          <p className="text-sm text-gray-700 whitespace-nowrap flex items-center gap-2">
+            Have questions? Reach out to us
+            <Rocket size={14} className="text-[#ff6154] animate-bounce" />
+          </p>
+        </div>
+      )}
       <button
         onClick={handleWhatsAppClick}
         className={`bg-[#25D366] text-white p-4 rounded-full shadow-lg hover:bg-[#128C7E] transition-all duration-300 flex items-center justify-center ${
