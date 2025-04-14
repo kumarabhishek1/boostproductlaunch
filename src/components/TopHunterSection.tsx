@@ -60,51 +60,51 @@ const TopHunterSection = () => {
   const topHunters = [
     {
       id: 1,
-      name: "Chris Messina",
-      image: "chris-messina.png",
-      responseTime: "< 2 hours",
-      successRate: "95% in Top 3",
-      featuredRate: "88% Featured"
+      name: "Kevin William David",
+      image: "kevin-william.png",
+      responseTime: "> 3 weeks",
+      successRate: "72% in Top 3",
+      featuredRate: "81.6% Featured"
     },
     {
       id: 2,
-      name: "Kevin William David",
-      image: "kevin-william.png",
-      responseTime: "< 3 hours",
-      successRate: "92% in Top 3",
-      featuredRate: "85% Featured"
+      name: "Rohan Chaubey",
+      image: "rohan-chaubey.png",
+      responseTime: "< 12 hours",
+      successRate: "97.3% in Top 3",
+      featuredRate: "99.1% Featured"
     },
     {
       id: 3,
-      name: "Bram Kanstein",
-      image: "bram-kanstein.png",
-      responseTime: "< 4 hours",
-      successRate: "90% in Top 3",
-      featuredRate: "82% Featured"
+      name: "Chris Messina",
+      image: "chris-messina.png",
+      responseTime: ">1 month",
+      successRate: "89.3% in Top 3",
+      featuredRate: "100% Featured"
     },
     {
       id: 4,
-      name: "Ben Tossell",
-      image: "ben-tossell.png",
-      responseTime: "< 2 hours",
-      successRate: "93% in Top 3",
-      featuredRate: "86% Featured"
+      name: "Kumar Abhishek",
+      image: "kumar-abhishek.png",
+      responseTime: "< 4 hours",
+      successRate: "83% in Top 3",
+      featuredRate: "91.9% Featured"
     },
     {
       id: 5,
-      name: "Justin Jackson",
-      image: "justin-jackson.png",
-      responseTime: "< 3 hours",
-      successRate: "91% in Top 3",
-      featuredRate: "84% Featured"
+      name: "Ben Lang",
+      image: "ben-lang.png",
+      responseTime: "> 36 hours",
+      successRate: "67% in Top 3",
+      featuredRate: "71% Featured"
     },
     {
       id: 6,
-      name: "Ryan Hoover",
-      image: "ryan-hoover.png",
-      responseTime: "< 1 hour",
-      successRate: "96% in Top 3",
-      featuredRate: "90% Featured"
+      name: "Adithya Shreshth",
+      image: "adithya-shreshth.png",
+      responseTime: "> 6 days",
+      successRate: "71% in Top 3",
+      featuredRate: "68.9% Featured"
     }
   ];
 
