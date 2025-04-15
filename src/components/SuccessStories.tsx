@@ -13,20 +13,26 @@ const SuccessStories: React.FC<Props> = ({ stories = [] }) => {
   const row1Ref = useRef<HTMLDivElement>(null);
   const row2Ref = useRef<HTMLDivElement>(null);
 
-  // Use a consistent placeholder image for all products
-  const getLogoUrl = () => {
-    return 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=150';
+  // Use actual logo images from the success stories directory
+  const getLogoUrl = (story: SuccessStory) => {
+    return story.logoPath;
   };
 
   const scroll = (direction: 'left' | 'right') => {
-    const scrollAmount = direction === 'left' ? -300 : 300;
+    const scrollAmount = direction === 'left' ? -600 : 600;
     
-    // Scroll both rows simultaneously
     if (row1Ref.current) {
-      row1Ref.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+      row1Ref.current.scrollBy({
+        left: scrollAmount,
+        behavior: 'smooth'
+      });
     }
+
     if (row2Ref.current) {
-      row2Ref.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+      row2Ref.current.scrollBy({
+        left: scrollAmount,
+        behavior: 'smooth'
+      });
     }
   };
 
@@ -35,11 +41,20 @@ const SuccessStories: React.FC<Props> = ({ stories = [] }) => {
       ? allStories 
       : allStories.filter(story => story.rank === selectedRank);
 
-    // Split into two rows
-    const row1 = filteredStories.slice(0, 6);
-    const row2 = filteredStories.slice(6);
-
-    return [row1, row2];
+    // Only split into two rows if we have enough items (for 'all' and '#1' ranks)
+    if (selectedRank === 'all' || selectedRank === '#1') {
+      const totalStories = filteredStories.length;
+      const storiesPerRow = Math.ceil(totalStories / 2);
+      
+      // Split into two rows with equal number of items
+      const row1 = filteredStories.slice(0, storiesPerRow);
+      const row2 = filteredStories.slice(storiesPerRow);
+      
+      return [row1, row2];
+    } else {
+      // For rank 2 and 3, keep all items in the first row
+      return [filteredStories, []];
+    }
   };
 
   const filteredStories = filterStories(stories);
@@ -47,8 +62,8 @@ const SuccessStories: React.FC<Props> = ({ stories = [] }) => {
   // Calculate if we need a second row and if it should be scrollable
   const firstRowCount = filteredStories[0].length;
   const secondRowCount = filteredStories[1].length;
-  const showSecondRow = firstRowCount >= 6 && secondRowCount > 0;
-  const row2Overflow = showSecondRow && secondRowCount > 6;
+  const showSecondRow = secondRowCount > 0;  // Show second row if it has any items
+  const row2Overflow = showSecondRow && secondRowCount > 0;
 
   const getRankColor = (rank: string) => {
     switch (rank) {
@@ -85,19 +100,15 @@ const SuccessStories: React.FC<Props> = ({ stories = [] }) => {
         {/* Scroll Buttons */}
         <div className="flex justify-end gap-2 mb-4">
           <button
-            onClick={() => {
-              scroll('left');
-            }}
-            className="p-2 rounded-full bg-white shadow-md hover:shadow-lg transition-shadow border border-gray-100"
+            onClick={() => scroll('left')}
+            className="p-2 rounded-full bg-white shadow-md hover:shadow-lg transition-all duration-200 border border-gray-100"
             aria-label="Scroll left"
           >
             <ChevronLeft className="h-5 w-5 sm:h-6 sm:w-6 text-gray-600" />
           </button>
           <button
-            onClick={() => {
-              scroll('right');
-            }}
-            className="p-2 rounded-full bg-white shadow-md hover:shadow-lg transition-shadow border border-gray-100"
+            onClick={() => scroll('right')}
+            className="p-2 rounded-full bg-white shadow-md hover:shadow-lg transition-all duration-200 border border-gray-100"
             aria-label="Scroll right"
           >
             <ChevronRight className="h-5 w-5 sm:h-6 sm:w-6 text-gray-600" />
@@ -109,11 +120,8 @@ const SuccessStories: React.FC<Props> = ({ stories = [] }) => {
           {filteredStories[0].length > 0 && (
             <div
               ref={row1Ref}
-              className={`flex gap-3 sm:gap-4 pb-4 ${
-                firstRowCount > 6 ? 'overflow-x-auto hide-scrollbar' : 'overflow-x-hidden'
-              }`}
+              className="flex gap-3 sm:gap-4 pb-4 overflow-x-auto hide-scrollbar"
               style={{
-                scrollSnapType: 'x mandatory',
                 scrollBehavior: 'smooth'
               }}
             >
@@ -123,8 +131,7 @@ const SuccessStories: React.FC<Props> = ({ stories = [] }) => {
                   href={story.productHuntUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="relative flex-none w-[160px] sm:w-[200px] aspect-square bg-white rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 cursor-pointer group overflow-hidden scroll-snap-align-start"
-                  style={{ scrollSnapAlign: 'start' }}
+                  className="relative flex-none w-[160px] sm:w-[200px] aspect-square bg-white rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 cursor-pointer group overflow-hidden"
                 >
                   <div className="absolute -top-1 -left-1 z-10">
                     <div className={`
@@ -140,7 +147,7 @@ const SuccessStories: React.FC<Props> = ({ stories = [] }) => {
                   
                   <div className="h-full flex flex-col items-center justify-center text-center p-3">
                     <img
-                      src={getLogoUrl()}
+                      src={getLogoUrl(story)}
                       alt={story.name}
                       className="w-16 h-16 object-cover rounded-lg mb-2 group-hover:scale-105 transition-transform duration-300"
                     />
@@ -157,15 +164,12 @@ const SuccessStories: React.FC<Props> = ({ stories = [] }) => {
           )}
         </div>
 
-        {/* Second Row - Only shown when first row is full */}
+        {/* Second Row */}
         {showSecondRow && (
           <div
             ref={row2Ref}
-            className={`flex gap-3 sm:gap-4 pb-4 ${
-              row2Overflow ? 'overflow-x-auto hide-scrollbar' : 'overflow-x-hidden'
-            }`}
+            className="flex gap-3 sm:gap-4 pb-4 overflow-x-auto hide-scrollbar"
             style={{
-              scrollSnapType: 'x mandatory',
               scrollBehavior: 'smooth'
             }}
           >
@@ -175,8 +179,7 @@ const SuccessStories: React.FC<Props> = ({ stories = [] }) => {
                 href={story.productHuntUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="relative flex-none w-[160px] sm:w-[200px] aspect-square bg-white rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 cursor-pointer group overflow-hidden scroll-snap-align-start"
-                style={{ scrollSnapAlign: 'start' }}
+                className="relative flex-none w-[160px] sm:w-[200px] aspect-square bg-white rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 cursor-pointer group overflow-hidden"
               >
                 <div className="absolute -top-1 -left-1 z-10">
                   <div className={`
@@ -192,7 +195,7 @@ const SuccessStories: React.FC<Props> = ({ stories = [] }) => {
                 
                 <div className="h-full flex flex-col items-center justify-center text-center p-3">
                   <img
-                    src={getLogoUrl()}
+                    src={getLogoUrl(story)}
                     alt={story.name}
                     className="w-16 h-16 object-cover rounded-lg mb-2 group-hover:scale-105 transition-transform duration-300"
                   />
