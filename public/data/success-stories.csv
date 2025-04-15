@@ -1,13 +1,22 @@
-id,name,productHuntUrl,rank,upvotes,logoFileName
-1,TechStartup Pro,https://www.producthunt.com/posts/techstartup-pro,#1,1.2k+ upvotes,tech-startup-pro.jpg
-2,DevFlow,https://www.producthunt.com/posts/devflow,#2,980+ upvotes,dev-flow.jpg
-3,AIWriter,https://www.producthunt.com/posts/aiwriter,#1,1.5k+ upvotes,ai-writer.jpg
-4,CloudStack,https://www.producthunt.com/posts/cloudstack,#2,890+ upvotes,cloud-stack.jpg
-5,MarketMaster,https://www.producthunt.com/posts/marketmaster,#1,1.1k+ upvotes,market-master.jpg
-6,DesignPro,https://www.producthunt.com/posts/designpro,#3,750+ upvotes,design-pro.jpg
-7,CodeMaster,https://www.producthunt.com/posts/codemaster,#1,2.1k+ upvotes,code-master.jpg
-8,DataFlow,https://www.producthunt.com/posts/dataflow,#2,1.8k+ upvotes,data-flow.jpg
-9,CloudMaster,https://www.producthunt.com/posts/cloudmaster,#1,1.6k+ upvotes,cloud-master.jpg
-10,AnalyticsPro,https://www.producthunt.com/posts/analyticspro,#2,1.3k+ upvotes,analytics-pro.jpg
-11,DevTools,https://www.producthunt.com/posts/devtools,#1,950+ upvotes,dev-tools.jpg
-12,TeamFlow,https://www.producthunt.com/posts/teamflow,#2,870+ upvotes,team-flow.jpg
+﻿id,name,productHuntUrl,rank,upvotes,logoFileName
+1,Waxwing,https://www.producthunt.com/products/waxwing-ai#waxwing,#1,1.2k+ upvotes,Waxwing.jpg
+2,Nas.io,https://www.producthunt.com/products/nas-io#nas-io-2,#2,400+ upvotes,Nasio.jpg
+3,Milestone,https://www.producthunt.com/products/milestone-2#milestone-3,#1,1.1k+ upvotes,Milestone.jpg
+4,Ava,https://www.producthunt.com/products/ava-the-sales-rep-artisan#ava-10,#2,360+ upvotes,Ava.jpg
+5,Findr,https://www.producthunt.com/products/findr-5#findr-5,#1,1.5k+ upvotes,Findr.jpg
+6,VocAdapt,https://www.producthunt.com/products/vocadapt#vocadapt,#1,940+ upvotes,Vocadapt.jpg
+7,Boost.space 4.0,https://www.producthunt.com/products/boost-space#boost-space-4-0,#1,990+ upvotes,Boostspace.jpg
+8,Quantera.ai,https://www.producthunt.com/products/quantera-ai#quantera-ai,#1,510+ upvotes,Quantera.jpg
+9,Trupeer.ai,https://www.producthunt.com/products/trupeer#trupeer-ai,#1,1.1k+ upvotes,Trupeer.jpg
+10,Namify AI,https://www.producthunt.com/products/namify#namify-ai,#1,1.1k+ upvotes,namify.jpg
+11,Telescope,https://www.producthunt.com/products/telescope-9#telescope-b2d1fe71-5d26-4c04-a2ff-544e59828902,#2,1k+ upvotes,Telescope.jpg
+12,Athina,https://www.producthunt.com/products/athina-ai#athina,#2,600+ upvotes,athina.jpg
+13,Jupitrr AI,https://www.producthunt.com/products/jupitrr#jupitrr-ai,#1,1.1k+ upvotes,Jupitrr.jpg
+14,Pieces Copilot+,https://www.producthunt.com/products/pieces-for-developers#pieces-copilot-2,#1,850+ upvotes,pieces.jpg
+15,AFFiNE AI,https://www.producthunt.com/products/affine-2#affine-ai,#1,820+ upvotes,Affine.jpg
+16,Central (YC S24),https://www.producthunt.com/products/central-yc-s24#central-yc-s24,#3,740+ upvotes,Central.jpg
+17,noplace,https://www.producthunt.com/products/noplace#noplace,#3,350+ upvotes,Noplace.jpg
+18,CloudDevs 2.0,https://www.producthunt.com/products/clouddevs-hire-developers#clouddevs-2-0,#3,430+ upvotes,Clouddevs.jpg
+19,Video Ocean,https://www.producthunt.com/products/video-ocean#video-ocean-1,#3,630+ upvotes,Videoocean.jpg
+20,Outspeed,https://www.producthunt.com/products/outspeed#outspeed,#3,500+ upvotes,Outspeed.jpg
+21,KwaKwa,https://www.producthunt.com/products/kwakwa-2#kwakwa-3,#3,590+ upvotes,Kwakwa.jpg

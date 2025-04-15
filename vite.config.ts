@@ -9,7 +9,7 @@ export default defineConfig(({ command, mode }) => {
   
   return {
     plugins: [react()],
-    base: './',
+    base: '/',
     optimizeDeps: {
       exclude: ['lucide-react'],
     },
@@ -30,10 +30,12 @@ export default defineConfig(({ command, mode }) => {
           },
         },
       },
+      copyPublicDir: true,
     },
     server: {
       port: 5173,
       host: true
     },
+    publicDir: 'public',
   };
 });

@@ -13,9 +13,22 @@ const SuccessStories: React.FC<Props> = ({ stories = [] }) => {
   const row1Ref = useRef<HTMLDivElement>(null);
   const row2Ref = useRef<HTMLDivElement>(null);
 
-  // Use actual logo images from the success stories directory
+  // Use actual logo images from the success stories directory with fallback
   const getLogoUrl = (story: SuccessStory) => {
-    return story.logoPath;
+    try {
+      // First try to get the image from the success stories directory
+      return story.logoPath;
+    } catch (error) {
+      console.error(`Error loading image for ${story.name}:`, error);
+      // Return a default placeholder image if the actual image fails to load
+      return 'https://placehold.co/200x200/ff6154/ffffff?text=' + encodeURIComponent(story.name.charAt(0));
+    }
+  };
+
+  // Add image error handling function
+  const handleImageError = (e: React.SyntheticEvent<HTMLImageElement, Event>, story: SuccessStory) => {
+    const img = e.target as HTMLImageElement;
+    img.src = `https://placehold.co/200x200/ff6154/ffffff?text=${encodeURIComponent(story.name.charAt(0))}`;
   };
 
   const scroll = (direction: 'left' | 'right') => {
@@ -149,6 +162,7 @@ const SuccessStories: React.FC<Props> = ({ stories = [] }) => {
                     <img
                       src={getLogoUrl(story)}
                       alt={story.name}
+                      onError={(e) => handleImageError(e, story)}
                       className="w-16 h-16 object-cover rounded-lg mb-2 group-hover:scale-105 transition-transform duration-300"
                     />
                     <h3 className="font-semibold text-gray-900 text-sm mb-1">{story.name}</h3>
@@ -197,6 +211,7 @@ const SuccessStories: React.FC<Props> = ({ stories = [] }) => {
                   <img
                     src={getLogoUrl(story)}
                     alt={story.name}
+                    onError={(e) => handleImageError(e, story)}
                     className="w-16 h-16 object-cover rounded-lg mb-2 group-hover:scale-105 transition-transform duration-300"
                   />
                   <h3 className="font-semibold text-gray-900 text-sm mb-1">{story.name}</h3>
