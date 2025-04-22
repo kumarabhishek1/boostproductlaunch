@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Users, ArrowRight, MessageSquare, ThumbsUp, Clock, Shield, Calendar, ShoppingCart, X } from 'lucide-react';
-import PayPalButton from './PayPalButton';
+// import PayPalButton from './PayPalButton';
 
 interface CartItem {
   distribution: number;
@@ -21,7 +21,7 @@ interface LeadData {
 
 const PricingPlans = () => {
   const [cart, setCart] = useState<CartItem[]>([]);
-  const [showPayPal, setShowPayPal] = useState(false);
+  // const [showPayPal, setShowPayPal] = useState(false);
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -79,10 +79,9 @@ const PricingPlans = () => {
 
   const submitLeadData = async (leadData: LeadData) => {
     try {
-      const GOOGLE_SCRIPT_URL = 'YOUR_GOOGLE_SCRIPT_URL';
-      
-      await fetch(GOOGLE_SCRIPT_URL, {
+      await fetch(import.meta.env.VITE_CONTACT_FORM_SCRIPT_URL, {
         method: 'POST',
+        mode: 'no-cors',
         headers: {
           'Content-Type': 'application/json',
         },
@@ -96,20 +95,47 @@ const PricingPlans = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    await submitLeadData({
-      ...formData,
-      selectedPackages: cart.map(item => `${item.distribution} members`).join(', '),
-      totalPrice: getTotalPrice(),
-      timestamp: new Date().toISOString(),
-    });
-
-    setShowPayPal(true);
-  };
-
-  const handlePayPalSuccess = async (details: any) => {
     try {
-      console.log('Payment successful:', details);
-      
+      const formDataToSend = {
+        timestamp: new Date().toISOString(),
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        email: formData.email,
+        productHuntUrl: formData.productHuntUrl,
+        launchDate: formData.launchDate,
+        selectedPackages: cart.map(item => `${item.distribution} members`).join(', '),
+        totalDistribution: getTotalDistribution(),
+        expectedUpvotes: getTotalUpvotes(),
+        totalPrice: getTotalPrice(),
+      };
+
+      console.log('Preparing to send data:', JSON.stringify(formDataToSend, null, 2));
+      console.log('Sending to URL:', 'https://script.google.com/macros/s/AKfycbwH2ie35XNLKM5os741LxNjMxMCL2x1zgj1nkPAUtafx8zCItH8oPGMBDNFCik6LoQIhg/exec');
+
+      const startTime = Date.now();
+      console.log('Starting request at:', new Date(startTime).toISOString());
+
+      const response = await fetch('https://script.google.com/macros/s/AKfycbwH2ie35XNLKM5os741LxNjMxMCL2x1zgj1nkPAUtafx8zCItH8oPGMBDNFCik6LoQIhg/exec', {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formDataToSend),
+      });
+
+      const endTime = Date.now();
+      console.log('Request completed at:', new Date(endTime).toISOString());
+      console.log('Request duration:', (endTime - startTime) / 1000, 'seconds');
+
+      // Since we're using no-cors mode, we can't check response.ok
+      // Instead, we'll assume success if we get here
+      console.log('Request completed successfully');
+
+      // Show success message
+      alert('Thank you for placing your order, our team will reach out to you within 24 hours. In case of urgency, please reach out to us via the WhatsApp chat button on the website or email us at hello@boostproductlaunch.com');
+
+      // Reset form
       setCart([]);
       setFormData({
         firstName: '',
@@ -118,19 +144,37 @@ const PricingPlans = () => {
         productHuntUrl: '',
         launchDate: '',
       });
-      setShowPayPal(false);
-
-      alert('Thank you for your payment! We will contact you shortly to discuss your launch.');
     } catch (error) {
-      console.error('Error processing payment:', error);
-      alert('There was an error processing your payment. Please try again.');
+      console.error('Error submitting order:', error);
+      alert('There was an error submitting your order. Please try again or contact us directly.');
     }
   };
 
-  const handlePayPalError = (error: any) => {
-    console.error('PayPal error:', error);
-    alert('There was an error processing your payment. Please try again.');
-  };
+  // const handlePayPalSuccess = async (details: any) => {
+  //   try {
+  //     console.log('Payment successful:', details);
+      
+  //     setCart([]);
+  //     setFormData({
+  //       firstName: '',
+  //       lastName: '',
+  //       email: '',
+  //       productHuntUrl: '',
+  //       launchDate: '',
+  //     });
+  //     setShowPayPal(false);
+
+  //     alert('Thank you for your payment! We will contact you shortly to discuss your launch.');
+  //   } catch (error) {
+  //     console.error('Error processing payment:', error);
+  //     alert('There was an error processing your payment. Please try again.');
+  //   }
+  // };
+
+  // const handlePayPalError = (error: any) => {
+  //   console.error('PayPal error:', error);
+  //   alert('There was an error processing your payment. Please try again.');
+  // };
 
   return (
     <div className="max-w-7xl mx-auto">
@@ -259,7 +303,7 @@ const PricingPlans = () => {
             </>
           )}
 
-          {showPayPal ? (
+          {/* {showPayPal ? (
             <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
               <div className="bg-white p-6 sm:p-8 rounded-xl max-w-md w-full">
                 <h3 className="text-xl sm:text-2xl font-bold mb-4">Complete Payment</h3>
@@ -280,7 +324,7 @@ const PricingPlans = () => {
                 </button>
               </div>
             </div>
-          ) : (
+          ) : ( */}
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="grid grid-cols-2 gap-4">
                 <div>
@@ -350,17 +394,17 @@ const PricingPlans = () => {
                 className="w-full bg-[#ff6154] text-white py-2 sm:py-3 px-4 rounded-lg font-semibold hover:bg-[#e5574b] transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 text-sm sm:text-base"
               >
                 <ShoppingCart className="h-4 w-4 sm:h-5 sm:w-5" />
-                Proceed to Payment
+                Generate Invoice
               </button>
 
-              <div className="flex items-center justify-center gap-4 text-xs sm:text-sm text-gray-500 mt-4">
+              {/* <div className="flex items-center justify-center gap-4 text-xs sm:text-sm text-gray-500 mt-4">
                 <div className="flex items-center gap-1">
                   <Shield className="h-4 w-4" />
                   Secure Checkout
                 </div>
-              </div>
+              </div> */}
             </form>
-          )}
+          {/* )} */}
         </div>
       </div>
     </div>

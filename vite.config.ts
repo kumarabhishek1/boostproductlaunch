@@ -15,8 +15,9 @@ export default defineConfig(({ command, mode }) => {
     },
     define: {
       // Expose env variables to your app
-      'process.env.VITE_GOOGLE_SCRIPT_URL': JSON.stringify(env.VITE_GOOGLE_SCRIPT_URL),
-      'process.env.VITE_PAYPAL_CLIENT_ID': JSON.stringify(env.VITE_PAYPAL_CLIENT_ID),
+      'process.env.VITE_CONTACT_FORM_SCRIPT_URL': JSON.stringify(env.VITE_CONTACT_FORM_SCRIPT_URL),
+      'process.env.VITE_PAYMENT_FORM_SCRIPT_URL': JSON.stringify(env.VITE_PAYMENT_FORM_SCRIPT_URL),
+      // 'process.env.VITE_PAYPAL_CLIENT_ID': JSON.stringify(env.VITE_PAYPAL_CLIENT_ID),
     },
     build: {
       outDir: 'dist',

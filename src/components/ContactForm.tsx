@@ -31,7 +31,7 @@ const ContactForm = () => {
   const onSubmit = async (data: FormData) => {
     try {
       // Get the Google Script URL from environment variables
-      const GOOGLE_SCRIPT_URL = import.meta.env.VITE_GOOGLE_SCRIPT_URL;
+      const GOOGLE_SCRIPT_URL = import.meta.env.VITE_CONTACT_FORM_SCRIPT_URL;
       
       if (!GOOGLE_SCRIPT_URL) {
         throw new Error('Google Apps Script URL is not configured');
