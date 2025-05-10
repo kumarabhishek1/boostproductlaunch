@@ -5,5 +5,18 @@ Disallow: /category/
 Disallow: /tag/
 Disallow: /author/
 Disallow: /page/
+Disallow: /wp-admin/
+Disallow: /wp-content/
+Disallow: /wp-includes/
+Disallow: /feed/
+Disallow: /comments/
+Disallow: /trackback/
+Disallow: /xmlrpc.php
+Disallow: /index.php
+Disallow: /*?*
 
+# Allow all other URLs
+Allow: /
+
+# Sitemap
 Sitemap: https://www.boostproductlaunch.com/sitemap.xml 
