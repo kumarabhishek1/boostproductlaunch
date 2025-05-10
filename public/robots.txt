@@ -1,0 +1,9 @@
+User-agent: *
+Disallow: /the-hidden-growth-strategy-no-one-talks-about-the-power-of-commenting/
+Disallow: /blog/
+Disallow: /category/
+Disallow: /tag/
+Disallow: /author/
+Disallow: /page/
+
+Sitemap: https://www.boostproductlaunch.com/sitemap.xml 
